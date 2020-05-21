@@ -1,0 +1,244 @@
+{
+	"module": "",
+	"formNm": "",
+	"projectid": 0,
+	"procNm": "",
+	"subProcNm": "",
+	"source": "ETL",
+	"description": "",
+	"contractTypeId": "",
+	"legalEntity": "",
+	"projectNm": "",
+	"effDt": "",
+	"createdBy": "",
+	"processStages": [{
+			"moduel": "",
+			"stgNm": "read",
+			"setSeq": 0,
+			"stgDesc": "",
+			"effDt": "",
+			"effStatus": "Y",
+			"processTasks": {
+				"module": "",
+				"stgNm": "",
+				"taskNm": "",
+				"taskDesc": "",
+				"taskSeq": 0,
+				"taskType": "",
+				"depdTask": "",
+				"effDt": "",
+				"effStatus": "Y",
+				"processTaskParams": [{
+						"module": "",
+						"stgNm": "",
+						"taskNm": "",
+						"paramNm": "in_data",
+						"paramVal": "",
+						"effStatus": "Y",
+						"effDt": "",
+						"taskSeq": "",
+						"derivedParams": [{
+							"dsetNm": "",
+							"source": "RDBMS",
+							"dsetDesc": "",
+							"dbConNm": "ORA_REG_META",
+							"dbType": "Oracle",
+							"qryStr": ""
+						}]
+					},
+					{
+						"module": "",
+						"stgNm": "",
+						"taskNm": "",
+						"paramNm": "out_data",
+						"paramVal": "",
+						"effStatus": "Y",
+						"effDt": "",
+						"taskSeq": ""
+					}
+				],
+				"logClltFlg": "n",
+				"statClltFlg": "N",
+				"cacheFlg": "n",
+				"persistType": "P"
+			},
+			"logClltFlg": "N",
+			"statClltFlg": "N",
+			"cacheFlg": "N"
+		},
+		{
+			"moduel": "",
+			"stgNm": "transform",
+			"setSeq": 0,
+			"stgDesc": "",
+			"effDt": "",
+			"effStatus": "Y",
+			"processTasks": [{
+					"module": "",
+					"stgNm": "",
+					"taskNm": "",
+					"taskDesc": "",
+					"taskSeq": 0,
+					"taskType": "",
+					"depdTask": "",
+					"effDt": "",
+					"effStatus": "Y",
+					"processTaskParams": [{
+							"module": "",
+							"stgNm": "",
+							"taskNm": "",
+							"paramNm": "in_data",
+							"paramVal": "",
+							"effStatus": "Y",
+							"effDt": "",
+							"taskSeq": ""
+						},
+						{
+							"module": "",
+							"stgNm": "",
+							"taskNm": "",
+							"paramNm": "",
+							"paramVal": "",
+							"effStatus": "Y",
+							"effDt": "",
+							"taskSeq": "",
+							"transformationDetails": [{
+								"trmNm": "",
+								"trfmExpression": ""
+							}]
+						},
+						{
+							"module": "",
+							"stgNm": "",
+							"taskNm": "",
+							"paramNm": "out_data",
+							"paramVal": "",
+							"effStatus": "Y",
+							"effDt": "",
+							"taskSeq": ""
+						}
+					],
+					"logClltFlg": "n",
+					"statClltFlg": "N",
+					"cacheFlg": "n",
+					"persistType": "P"
+				},
+				{
+					"module": "",
+					"stgNm": "",
+					"taskNm": "",
+					"taskDesc": "",
+					"taskSeq": 0,
+					"taskType": "",
+					"depdTask": "",
+					"effDt": "",
+					"effStatus": "Y",
+					"processTaskParams": [{
+							"module": "",
+							"stgNm": "",
+							"taskNm": "",
+							"paramNm": "in_data",
+							"paramVal": "",
+							"effStatus": "Y",
+							"effDt": "",
+							"taskSeq": ""
+						},
+						{
+							"module": "",
+							"stgNm": "",
+							"taskNm": "",
+							"paramNm": "",
+							"paramVal": "",
+							"effStatus": "Y",
+							"effDt": "",
+							"taskSeq": ""
+						},
+						{
+							"module": "",
+							"stgNm": "",
+							"taskNm": "",
+							"paramNm": "out_data",
+							"paramVal": "",
+							"effStatus": "Y",
+							"effDt": "",
+							"taskSeq": ""
+						}
+					],
+					"logClltFlg": "n",
+					"statClltFlg": "N",
+					"cacheFlg": "n",
+					"persistType": "P"
+				}
+			],
+			"logClltFlg": "N",
+			"statClltFlg": "N",
+			"cacheFlg": "N"
+		},
+		{
+			"moduel": "",
+			"stgNm": "write",
+			"setSeq": 0,
+			"stgDesc": "",
+			"effDt": "",
+			"effStatus": "Y",
+			"processTasks": {
+				"module": "",
+				"stgNm": "",
+				"taskNm": "",
+				"taskDesc": "",
+				"taskSeq": 0,
+				"taskType": "",
+				"depdTask": "",
+				"effDt": "",
+				"effStatus": "Y",
+				"processTaskParams": [{
+						"module": "",
+						"stgNm": "",
+						"taskNm": "",
+						"paramNm": "in_data",
+						"paramVal": "",
+						"effStatus": "Y",
+						"effDt": "",
+						"taskSeq": ""
+					},
+					{
+						"module": "",
+						"stgNm": "",
+						"taskNm": "",
+						"paramNm": "",
+						"paramVal": "",
+						"effStatus": "Y",
+						"effDt": "",
+						"taskSeq": "",
+						"derivedParams": {
+							"dsetNm": "",
+							"source": "RDBMS",
+							"dsetDesc": "",
+							"dbConNm": "ORA_REG_META",
+							"dbType": "Oracle",
+							"tblNm": "",
+							"saveMode": "Append"
+						}
+					},
+					{
+						"module": "",
+						"stgNm": "",
+						"taskNm": "",
+						"paramNm": "out_data",
+						"paramVal": "",
+						"effStatus": "Y",
+						"effDt": "",
+						"taskSeq": ""
+					}
+				],
+				"logClltFlg": "n",
+				"statClltFlg": "N",
+				"cacheFlg": "n",
+				"persistType": "P"
+			},
+			"logClltFlg": "N",
+			"statClltFlg": "N",
+			"cacheFlg": "N"
+		}
+	]
+}

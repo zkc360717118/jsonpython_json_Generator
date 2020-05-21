@@ -1,0 +1,521 @@
+{
+  "module": "LRR_JP_OTC",
+  "formNm": "NA",
+  "sheduleNm": "NA",
+  "projectid": 0,
+  "procNm": "OTC_DAILY",
+  "subProcNm": "OTC",
+  "source": "ETL",
+  "description": "FOR OTC DAILY",
+  "contractTypeId": "1",
+  "legalEntity": "CitiGroup",
+  "projectNm": "REGINSIGHT_APAC",
+  "effDt": "2020-05-21",
+  "effStatus": "y",
+  "createdBy": "kz05127",
+  "processStages": [
+    {
+      "moduel": "LRR_JP_OTC",
+      "stgNm": "DATA_SOURCE",
+      "setSeq": 0,
+      "stgDesc": "read data from source",
+      "effDt": "2020-05-21 00:00:00.0",
+      "effStatus": "Y",
+      "processTasks": [
+        {
+          "module": "LRR_JP_OTC",
+          "stgNm": "DATA_SOURCE",
+          "taskNm": "READ_OTC_DATA",
+          "taskDesc": "read data from Oracel table",
+          "taskSeq": 0,
+          "taskType": "READ",
+          "depdTask": "NA",
+          "effDt": "2020-05-21",
+          "effStatus": "Y",
+          "processTaskParams": [
+            {
+              "module": "LRR_JP_OTC",
+              "stgNm": "DATA_SOURCE",
+              "taskNm": "READ_OTC_DATA",
+              "paramNm": "in_data",
+              "paramVal": "DSET.IN_V_ODS_OTC_INDCTV_BAL_M",
+              "effStatus": "Y",
+              "effDt": "2020-05-21 00:00:00.0",
+              "taskSeq": "0",
+              "derivedParams": {
+                "dsetNm": "DSET.IN_V_ODS_OTC_INDCTV_BAL_M",
+                "source": "RDBMS",
+                "dsetDesc": "read data from V_ODS_OTC_INDCTV_BAL_D",
+                "dbConNm": "ORA_REG_META",
+                "dbType": "Oracle",
+                "qryStr": "select * from V_ODS_OTC_INDCTV_BAL_D WHERE ARRG_DIM_COB_DT***********"
+              }
+            },
+            {
+              "module": "LRR_JP_OTC",
+              "stgNm": "DATA_SOURCE",
+              "taskNm": "READ_OTC_DATA",
+              "paramNm": "out_data",
+              "paramVal": "DSET.OUT_LRR_JP_OTC",
+              "effStatus": "Y",
+              "effDt": "2020-05-21 00:00:00.0",
+              "taskSeq": "0"
+            }
+          ],
+          "logClltFlg": "N",
+          "statClltFlg": "N",
+          "cacheFlg": "N",
+          "persistType": "P"
+        },
+        {
+          "module": "LRR_JP_OTC",
+          "stgNm": "DATA_SOURCE",
+          "taskNm": "BOJ_RATE_LOOKUP",
+          "taskDesc": "read data from BOJ_RATE_MAN table",
+          "taskSeq": 1,
+          "taskType": "READ",
+          "depdTask": "NA",
+          "effDt": "2020-05-21",
+          "effStatus": "Y",
+          "processTaskParams": [
+            {
+              "module": "LRR_JP_OTC",
+              "stgNm": "DATA_SOURCE",
+              "taskNm": "BOJ_RATE_LOOKUP",
+              "paramNm": "in_data",
+              "paramVal": "DSET.IN_BOJ_RATE_MAN",
+              "effStatus": "Y",
+              "effDt": "2020-05-21 00:00:00.0",
+              "taskSeq": "1",
+              "derivedParams": {
+                "dsetNm": "DSET.IN_BOJ_RATE_MAN",
+                "source": "RDBMS",
+                "dsetDesc": "read data from BOJ_RATE_MAN",
+                "dbConNm": "ORA_REG_META",
+                "dbType": "Oracle",
+                "qryStr": "select CCY, BOJ_RATE,AS_OF_DT from BOJ_RATE_MAN WHERE ***********"
+              }
+            },
+            {
+              "module": "LRR_JP_OTC",
+              "stgNm": "DATA_SOURCE",
+              "taskNm": "BOJ_RATE_LOOKUP",
+              "paramNm": "out_data",
+              "paramVal": "DSET.OUT_BOJ_RATE_LOOKUP",
+              "effStatus": "Y",
+              "effDt": "2020-05-21 00:00:00.0",
+              "taskSeq": "1"
+            }
+          ],
+          "logClltFlg": "N",
+          "statClltFlg": "N",
+          "cacheFlg": "N",
+          "persistType": "P"
+        }
+      ],
+      "logClltFlg": "N",
+      "statClltFlg": "N",
+      "cacheFlg": "N"
+    },
+    {
+      "moduel": "LRR_JP_OTC",
+      "stgNm": "DATA_TRANSFORM",
+      "setSeq": 1,
+      "stgDesc": "transformation for LRR_JP_OTC",
+      "effDt": "2020-05-21 00:00:00.0",
+      "effStatus": "Y",
+      "processTasks": [
+        {
+          "module": "LRR_JP_OTC",
+          "stgNm": "DATA_TRANSFORM",
+          "taskNm": "DEDUP_LRR_JP_OTC_DATA",
+          "taskDesc": "Dedup JPLRR input dataset",
+          "taskSeq": 0,
+          "taskType": "DEDUP",
+          "depdTask": "READ_OTC_DATA",
+          "effDt": "2020-05-21",
+          "effStatus": "Y",
+          "processTaskParams": [
+            {
+              "module": "LRR_JP_OTC",
+              "stgNm": "DATA_TRANSFORM",
+              "taskNm": "DEDUP_LRR_JP_OTC_DATA",
+              "paramNm": "in_data",
+              "paramVal": "DSET.OUT_LRR_JP_OTC",
+              "effStatus": "Y",
+              "effDt": "2020-05-21",
+              "taskSeq": "0"
+            },
+            {
+              "module": "LRR_JP_OTC",
+              "stgNm": "DATA_TRANSFORM",
+              "taskNm": "DEDUP_LRR_JP_OTC_DATA",
+              "paramNm": "keys",
+              "paramVal": "SURR_KEY",
+              "effStatus": "Y",
+              "effDt": "2020-05-21 00:00:00.0",
+              "taskSeq": 0
+            },
+            {
+              "module": "LRR_JP_OTC",
+              "stgNm": "DATA_TRANSFORM",
+              "taskNm": "DEDUP_LRR_JP_OTC_DATA",
+              "paramNm": "out_data",
+              "paramVal": "LRR_JP_OTC_DEDUP_OUT",
+              "effStatus": "Y",
+              "effDt": "2020-05-21 00:00:00.0",
+              "taskSeq": 0
+            }
+          ],
+          "logClltFlg": "N",
+          "statClltFlg": "N",
+          "cacheFlg": "N",
+          "persistType": "P"
+        },
+        {
+          "module": "LRR_JP_OTC",
+          "stgNm": "DATA_TRANSFORM",
+          "taskNm": "SORT_LRR_JP_OTC",
+          "taskDesc": "sort data",
+          "taskSeq": 1,
+          "taskType": "SORT",
+          "depdTask": "DEDUP_LRR_JP_OTC_DATA",
+          "effDt": "2020-05-21",
+          "effStatus": "Y",
+          "processTaskParams": [
+            {
+              "module": "LRR_JP_OTC",
+              "stgNm": "DATA_TRANSFORM",
+              "taskNm": "SORT_LRR_JP_OTC",
+              "paramNm": "in_data",
+              "paramVal": "LRR_JP_OTC_DEDUP_OUT",
+              "effStatus": "Y",
+              "effDt": "2020-05-21",
+              "taskSeq": "1"
+            },
+            {
+              "module": "LRR_JP_OTC",
+              "stgNm": "DATA_TRANSFORM",
+              "taskNm": "SORT_LRR_JP_OTC",
+              "paramNm": "sort",
+              "paramVal": "UNIQ_ID_IN_SRC_SYS asc,CITI_LV asc,CPRT_GFCID asc,CPRT_GFCID asc,ACTG_UNIT_ID asc",
+              "effStatus": "Y",
+              "effDt": "2020-05-21 00:00:00.0",
+              "taskSeq": 1
+            },
+            {
+              "module": "LRR_JP_OTC",
+              "stgNm": "DATA_TRANSFORM",
+              "taskNm": "SORT_LRR_JP_OTC",
+              "paramNm": "out_data",
+              "paramVal": "LRR_JP_OTC_SORT_OUT",
+              "effStatus": "Y",
+              "effDt": "2020-05-21 00:00:00.0",
+              "taskSeq": 1
+            }
+          ],
+          "logClltFlg": "N",
+          "statClltFlg": "N",
+          "cacheFlg": "N",
+          "persistType": "P"
+        },
+        {
+          "module": "LRR_JP_OTC",
+          "stgNm": "DATA_TRANSFORM",
+          "taskNm": "REFORMAT_SCAN_LRR_JP_OTC_INDEX1",
+          "taskDesc": "reformat data",
+          "taskSeq": 2,
+          "taskType": "REFORMAT",
+          "depdTask": "SORT_LRR_JP_OTC",
+          "effDt": "2020-05-21",
+          "effStatus": "Y",
+          "processTaskParams": [
+            {
+              "module": "LRR_JP_OTC",
+              "stgNm": "DATA_TRANSFORM",
+              "taskNm": "REFORMAT_SCAN_LRR_JP_OTC_INDEX1",
+              "paramNm": "in_data",
+              "paramVal": "LRR_JP_OTC_SORT_OUT",
+              "effStatus": "Y",
+              "effDt": "2020-05-21",
+              "taskSeq": "2"
+            },
+            {
+              "module": "LRR_JP_OTC",
+              "stgNm": "DATA_TRANSFORM",
+              "taskNm": "REFORMAT_SCAN_LRR_JP_OTC_INDEX1",
+              "paramNm": "transform",
+              "paramVal": "LRR_JP_OTC_REFORMAT_SCAN_INDEX1_TRF",
+              "effStatus": "Y",
+              "effDt": "2020-05-21 00:00:00.0",
+              "taskSeq": 2,
+              "transformationDetails": [
+                {
+                  "trmNm": "LRR_JP_OTC_REFORMAT_SCAN_INDEX1_TRF",
+                  "trfmExpression": "{ PREV_TXN_CCY_TEMP1:: LRR_JP_OTC \n ACCTG_UNIT_ID:: DATA_TRANSFORM}"
+                }
+              ]
+            },
+            {
+              "module": "LRR_JP_OTC",
+              "stgNm": "DATA_TRANSFORM",
+              "taskNm": "REFORMAT_SCAN_LRR_JP_OTC_INDEX1",
+              "paramNm": "out_data",
+              "paramVal": "LRR_JP_OTC_REFORMAT_SCAN_INDEX1_OUT",
+              "effStatus": "Y",
+              "effDt": "2020-05-21 00:00:00.0",
+              "taskSeq": 2
+            }
+          ],
+          "logClltFlg": "N",
+          "statClltFlg": "N",
+          "cacheFlg": "N",
+          "persistType": "P"
+        },
+        {
+          "module": "LRR_JP_OTC",
+          "stgNm": "DATA_TRANSFORM",
+          "taskNm": "SWG_LRR_JP_OTC",
+          "taskDesc": "sort with groups",
+          "taskSeq": 3,
+          "taskType": "SORT_WITH_GROUPS",
+          "depdTask": "REFORMAT_SCAN_LRR_JP_OTC_INDEX1",
+          "effDt": "2020-05-21",
+          "effStatus": "Y",
+          "processTaskParams": [
+            {
+              "module": "LRR_JP_OTC",
+              "stgNm": "DATA_TRANSFORM",
+              "taskNm": "SWG_LRR_JP_OTC",
+              "paramNm": "in_data",
+              "paramVal": "LRR_JP_OTC_REFORMAT_SCAN_INDEX1_OUT",
+              "effStatus": "Y",
+              "effDt": "2020-05-21",
+              "taskSeq": "3"
+            },
+            {
+              "module": "LRR_JP_OTC",
+              "stgNm": "DATA_TRANSFORM",
+              "taskNm": "SWG_LRR_JP_OTC",
+              "paramNm": "majorKey",
+              "paramVal": "UNIQ_ID_IN_SRC_SYS,CITI_LV,CPRT_GFCID",
+              "effStatus": "Y",
+              "effDt": "2020-05-21",
+              "taskSeq": "3"
+            },
+            {
+              "module": "LRR_JP_OTC",
+              "stgNm": "DATA_TRANSFORM",
+              "taskNm": "SWG_LRR_JP_OTC",
+              "paramNm": "majorKeyOrder",
+              "paramVal": "asc,asc,asc",
+              "effStatus": "Y",
+              "effDt": "2020-05-21",
+              "taskSeq": "3"
+            },
+            {
+              "module": "LRR_JP_OTC",
+              "stgNm": "DATA_TRANSFORM",
+              "taskNm": "SWG_LRR_JP_OTC",
+              "paramNm": "minorKey",
+              "paramVal": "ACTG_UNIT_ID",
+              "effStatus": "Y",
+              "effDt": "2020-05-21",
+              "taskSeq": "3"
+            },
+            {
+              "module": "LRR_JP_OTC",
+              "stgNm": "DATA_TRANSFORM",
+              "taskNm": "SWG_LRR_JP_OTC",
+              "paramNm": "minorKeyOrder",
+              "paramVal": "desc",
+              "effStatus": "Y",
+              "effDt": "2020-05-21",
+              "taskSeq": "3"
+            },
+            {
+              "module": "LRR_JP_OTC",
+              "stgNm": "DATA_TRANSFORM",
+              "taskNm": "SWG_LRR_JP_OTC",
+              "paramNm": "out_data",
+              "paramVal": "LRR_JP_OTC_SWG_OUT",
+              "effStatus": "Y",
+              "effDt": "2020-05-21",
+              "taskSeq": "3"
+            }
+          ],
+          "logClltFlg": "N",
+          "statClltFlg": "N",
+          "cacheFlg": "N",
+          "persistType": "P"
+        },
+        {
+          "module": "LRR_JP_OTC",
+          "stgNm": "DATA_TRANSFORM",
+          "taskNm": "AGGREAGET_LRR_JP_OTC",
+          "taskDesc": "aggregate data",
+          "taskSeq": 4,
+          "taskType": "AGGREGATE",
+          "depdTask": "LRR_JP_OTC_SWG_OUT",
+          "effDt": "2020-05-21",
+          "effStatus": "Y",
+          "processTaskParams": [
+            {
+              "module": "LRR_JP_OTC",
+              "stgNm": "DATA_TRANSFORM",
+              "taskNm": "AGGREAGET_LRR_JP_OTC",
+              "paramNm": "in_data",
+              "paramVal": "LRR_JP_OTC_SWG_OUT",
+              "effStatus": "Y",
+              "effDt": "2020-05-21",
+              "taskSeq": "4"
+            },
+            {
+              "module": "LRR_JP_OTC",
+              "stgNm": "DATA_TRANSFORM",
+              "taskNm": "AGGREAGET_LRR_JP_OTC",
+              "paramNm": "agg",
+              "paramVal": "TXN_CCY_AMT_temp1:SUM~TXN_CCY_AMT_temp2,FNCT_CCY_AMT_temp1:SUM~FNCT_CCY_AMT_temp2",
+              "effStatus": "Y",
+              "effDt": "2020-05-21",
+              "taskSeq": "4"
+            },
+            {
+              "module": "LRR_JP_OTC",
+              "stgNm": "DATA_TRANSFORM",
+              "taskNm": "AGGREAGET_LRR_JP_OTC",
+              "paramNm": "group_by",
+              "paramVal": "UNIQ_ID_IN_SRC_SYS,CITI_LV,CPRT_GFCID",
+              "effStatus": "Y",
+              "effDt": "2020-05-21",
+              "taskSeq": "4"
+            },
+            {
+              "module": "LRR_JP_OTC",
+              "stgNm": "DATA_TRANSFORM",
+              "taskNm": "AGGREAGET_LRR_JP_OTC",
+              "paramNm": "out_data",
+              "paramVal": "LRR_JP_OTC_AGGREAGET_OUT",
+              "effStatus": "Y",
+              "effDt": "2020-05-21",
+              "taskSeq": "4"
+            }
+          ],
+          "logClltFlg": "N",
+          "statClltFlg": "N",
+          "cacheFlg": "N",
+          "persistType": "P"
+        },
+        {
+          "module": "LRR_JP_OTC",
+          "stgNm": "DATA_TRANSFORM",
+          "taskNm": "UNION_LRR_JP_OTC",
+          "taskDesc": "union data",
+          "taskSeq": 5,
+          "taskType": "UNION",
+          "depdTask": "AGGREAGET_LRR_JP_OTC",
+          "effDt": "2020-05-21",
+          "effStatus": "Y",
+          "processTaskParams": [
+            {
+              "module": "LRR_JP_OTC",
+              "stgNm": "DATA_TRANSFORM",
+              "taskNm": "UNION_LRR_JP_OTC",
+              "paramNm": "in_data",
+              "paramVal": "LRR_JP_OTC_REFORMAT_ROLLUP_INDEX4_OUT,LRR_JP_OTC_REFORMAT_SCAN_INDEX3_OUT",
+              "effStatus": "Y",
+              "effDt": "2020-05-21",
+              "taskSeq": "5"
+            },
+            {
+              "module": "LRR_JP_OTC",
+              "stgNm": "DATA_TRANSFORM",
+              "taskNm": "UNION_LRR_JP_OTC",
+              "paramNm": "out_data",
+              "paramVal": "LRR_JP_OTC_UNION_OUT",
+              "effStatus": "Y",
+              "effDt": "2020-05-21",
+              "taskSeq": "5"
+            }
+          ],
+          "logClltFlg": "N",
+          "statClltFlg": "N",
+          "cacheFlg": "N",
+          "persistType": "P"
+        }
+      ],
+      "logClltFlg": "N",
+      "statClltFlg": "N",
+      "cacheFlg": "N"
+    },
+    {
+      "moduel": "LRR_JP_OTC",
+      "stgNm": "DATA_OUTPUT",
+      "setSeq": 2,
+      "stgDesc": "export data  for LRR_JP_OTC",
+      "effDt": "2020-05-21 00:00:00.0",
+      "effStatus": "Y",
+      "processTasks": [
+        {
+          "module": "LRR_JP_OTC",
+          "stgNm": "DATA_EXPORT",
+          "taskNm": "TARGET_LOAD",
+          "taskDesc": "load data from target table",
+          "taskSeq": 0,
+          "taskType": "WRITE",
+          "depdTask": "UNION_LRR_JP_OTC",
+          "effDt": "2020-05-21",
+          "effStatus": "Y",
+          "processTaskParams": [
+            {
+              "module": "LRR_JP_OTC",
+              "stgNm": "DATA_EXPORT",
+              "taskNm": "TARGET_LOAD",
+              "paramNm": "in_data",
+              "paramVal": "LRR_JP_OTC_UNION_OUT",
+              "effStatus": "Y",
+              "effDt": "2020-05-21 00:00:00.0",
+              "taskSeq": "0"
+            },
+            {
+              "module": "LRR_JP_OTC",
+              "stgNm": "DATA_EXPORT",
+              "taskNm": "TARGET_LOAD",
+              "paramNm": "out_data",
+              "paramVal": "DSET.OUT_LRR_JP_OTC",
+              "effStatus": "Y",
+              "effDt": "2020-05-21 00:00:00.0",
+              "taskSeq": "0",
+              "derivedParams": {
+                "dsetNm": "DSET.OUT_LRR_JP_OTC",
+                "source": "RDBMS",
+                "dsetDesc": "write data to MASTER_DATASET",
+                "dbConNm": "ORA_REG_META",
+                "dbType": "Oracle",
+                "tblNm": "ODS_ENRICHED_OTC_DATASET",
+                "saveMode": "Append"
+              }
+            },
+            {
+              "module": "LRR_JP_OTC",
+              "stgNm": "DATA_EXPORT",
+              "taskNm": "TARGET_LOAD",
+              "paramNm": "table",
+              "paramVal": "ODS_ENRICHED_OTC_DATASET",
+              "effStatus": "Y",
+              "effDt": "2020-05-21 00:00:00.0",
+              "taskSeq": "0"
+            }
+          ],
+          "logClltFlg": "N",
+          "statClltFlg": "N",
+          "cacheFlg": "N",
+          "persistType": "P"
+        }
+      ],
+      "logClltFlg": "N",
+      "statClltFlg": "N",
+      "cacheFlg": "N"
+    }
+  ]
+}
