@@ -360,7 +360,7 @@ class Tool:
         else:
             return date
 
-    def setMainInfo(self, module, procNm, subProcNm, description, effStatus, createdBy,effDt="",projectNm="REGINSIGHT_APAC",legalEntity="CitiGroup",formNm="NA",projectid=0,sheduleNm="NA",source="ETL",contractTypeId="1"):
+    def setMainInfo(self, module, procNm, subProcNm, description, effStatus, createdBy,effDt="",projectNm="REGINSIGHT_APAC",legalEntity="@@@@Group",formNm="NA",projectid=0,sheduleNm="NA",source="ETL",contractTypeId="1"):
         if(effDt == ""):
             effDt = self.getCurrentTime(False)
 

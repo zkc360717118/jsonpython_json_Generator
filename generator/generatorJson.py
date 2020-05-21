@@ -30,7 +30,7 @@ class WorkBench:
     def addSubtasksForOutputStage(self, *tasks):
         self.output_stage["processTasks"] = tasks
 
-    def formFinalJson(self, procNm, subProcNm, description, createdBy,effStatus="y",effDt="",projectNm="REGINSIGHT_APAC",legalEntity="CitiGroup",formNm="NA",projectid=0,sheduleNm="NA",source="ETL",contractTypeId="1"):
+    def formFinalJson(self, procNm, subProcNm, description, createdBy,effStatus="y",effDt="",projectNm="REGINSIGHT_APAC",legalEntity="@@@@Group",formNm="NA",projectid=0,sheduleNm="NA",source="ETL",contractTypeId="1"):
         tool = Tool()
         finalJson = tool.setMainInfo(self.module, procNm, subProcNm, description, effStatus, createdBy,effDt,projectNm,legalEntity,formNm,projectid,sheduleNm,source,contractTypeId)
         finalJson["processStages"] = [self.input_stage,self.transform_stage,self.output_stage]

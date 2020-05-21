@@ -56,7 +56,7 @@ task2 = tool.getTaskForTransStage(taskType="SORT",
                                                    depdTask="DEDUP_LRR_JP_OTC_DATA",
                                                    processParamVal={"in_data": "LRR_JP_OTC_DEDUP_OUT",
                                                                     "out_data": "LRR_JP_OTC_SORT_OUT",
-                                                                    "sort": "UNIQ_ID_IN_SRC_SYS asc,CITI_LV asc,CPRT_GFCID asc,CPRT_GFCID asc,ACTG_UNIT_ID asc"
+                                                                    "sort": "UNIQ_ID_IN_SRC_SYS asc,@@@@_LV asc,CPRT_GFCID asc,CPRT_GFCID asc,ACTG_UNIT_ID asc"
                                                                     })
 
 task3TrfmExpression = "{ PREV_TXN_CCY_TEMP1:: LRR_JP_OTC \n ACCTG_UNIT_ID:: DATA_TRANSFORM}"
@@ -82,7 +82,7 @@ task4 = tool.getTaskForTransStage(taskType="sort_with_groups",
                                                    depdTask="REFORMAT_SCAN_LRR_JP_OTC_INDEX1",
                                                    processParamVal={"in_data": "LRR_JP_OTC_REFORMAT_SCAN_INDEX1_OUT",
                                                                     "out_data": "LRR_JP_OTC_SWG_OUT",
-                                                                    "majorKey": "UNIQ_ID_IN_SRC_SYS,CITI_LV,CPRT_GFCID",
+                                                                    "majorKey": "UNIQ_ID_IN_SRC_SYS,@@@@_LV,CPRT_GFCID",
                                                                     "majorKeyOrder": "asc,asc,asc",
                                                                     "minorKey": "ACTG_UNIT_ID",
                                                                     "minorKeyOrder": "desc"}
@@ -98,7 +98,7 @@ task5 = tool.getTaskForTransStage(taskType="aggregate",
                                                    processParamVal={"in_data": "LRR_JP_OTC_SWG_OUT",
                                                                     "out_data": "LRR_JP_OTC_AGGREAGET_OUT",
                                                                     "agg": "TXN_CCY_AMT_temp1:SUM~TXN_CCY_AMT_temp2,FNCT_CCY_AMT_temp1:SUM~FNCT_CCY_AMT_temp2",
-                                                                    "group_by": "UNIQ_ID_IN_SRC_SYS,CITI_LV,CPRT_GFCID"}
+                                                                    "group_by": "UNIQ_ID_IN_SRC_SYS,@@@@_LV,CPRT_GFCID"}
                                                    )
 
 task6 = tool.getTaskForTransStage(taskType="union",
